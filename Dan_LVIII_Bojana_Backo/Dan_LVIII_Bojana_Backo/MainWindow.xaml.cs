@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dan_LVIII_Bojana_Backo
 {
@@ -37,17 +27,10 @@ namespace Dan_LVIII_Bojana_Backo
         // importing the random number generator class
         Random rand = new Random();
 
-        // set the player win integer to 0
-        int playerWins = 0;
-
-        // set the computer win integer to 0
-        int computerWins = 0;
-
         public MainWindow()
         {
             InitializeComponent();
             // call the set game function
-            //resetGame();
             loadbuttons();
         }
         private void Button_Click(object sender, EventArgs e)
@@ -56,11 +39,10 @@ namespace Dan_LVIII_Bojana_Backo
             currentPlayer = Player.X; // set the player to X
             button.Content = currentPlayer.ToString(); // change the button text to player X
             button.IsEnabled = false; // disable the button
-            button.Background = Brushes.Yellow; // change the player colour to Cyan
-            button.Foreground = Brushes.DarkBlue;
+            button.Foreground = Brushes.DarkBlue; // change the player colour to DarkBlue
             buttons.Remove(button); //remove the button from the list buttons so the AI can't click it either
             Check(); // check if the player won
-            AImove(); // start the AI timer
+            AImove(); // start the AI
         }
         private void AImove()
         {
@@ -77,11 +59,9 @@ namespace Dan_LVIII_Bojana_Backo
                                  // then we select the 8th button in the list
                 currentPlayer = Player.O; // set the AI with O
                 buttons[index].Content = currentPlayer.ToString(); // show O on the button
-                buttons[index].Background = Brushes.AntiqueWhite; // change the background of the button dark salmon colour
-                buttons[index].Foreground = Brushes.DeepPink;
+                buttons[index].Foreground = Brushes.DeepPink; // change the background of the button DeepPink colour
                 buttons.RemoveAt(index); // remove that button from the list
                 Check(); // check if the AI won anything
-                //AImoves.Stop(); // stop the AI timer
             }
         }
         private void loadbuttons()
@@ -106,10 +86,7 @@ namespace Dan_LVIII_Bojana_Backo
             || button3.Content.Equals("X") && button5.Content.Equals("X") && button7.Content.Equals("X"))
             {
                 // if any of the above conditions are met
-                //AImoves.Stop(); //stop the timer
                 MessageBox.Show("Player Wins"); // show a message to the player
-                playerWins++; // increase the player wins
-                //label1.Text = "Player Wins- " + playerWins; // update player label
                 resetGame(); // run the reset game function
             }
             // below if statement is for when the AI wins the game
@@ -126,8 +103,11 @@ namespace Dan_LVIII_Bojana_Backo
                 // this code will run when the AI wins the game
                 //AImoves.Stop(); // stop the timer
                 MessageBox.Show("Computer Wins"); // show a message box to say computer won
-                computerWins++; // increase the computer wins score number
                 resetGame(); // run the reset game
+            }
+            else
+            {
+                resetGame();
             }
         }
         private void resetGame()
