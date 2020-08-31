@@ -27,6 +27,12 @@ namespace Dan_LVIII_Bojana_Backo
         // importing the random number generator class
         Random rand = new Random();
 
+        // set the player win integer to 0
+        int playerWins = 0;
+
+        // set the computer win integer to 0
+        int computerWins = 0; 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -86,7 +92,8 @@ namespace Dan_LVIII_Bojana_Backo
             || button3.Content.Equals("X") && button5.Content.Equals("X") && button7.Content.Equals("X"))
             {
                 // if any of the above conditions are met
-                MessageBox.Show("Player Wins"); // show a message to the player
+                playerWins += 1;
+                MessageBox.Show("You Won"); // show a message to the player
                 resetGame(); // run the reset game function
             }
             // below if statement is for when the AI wins the game
@@ -101,13 +108,9 @@ namespace Dan_LVIII_Bojana_Backo
             {
                 // if any of the conditions are met above then we will do the following
                 // this code will run when the AI wins the game
-                //AImoves.Stop(); // stop the timer
+                computerWins += 1;
                 MessageBox.Show("Computer Wins"); // show a message box to say computer won
-                resetGame(); // run the reset game
-            }
-            else
-            {
-                resetGame();
+                resetGame(); // run the reset game function
             }
         }
         private void resetGame()
